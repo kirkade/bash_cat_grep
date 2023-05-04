@@ -87,9 +87,7 @@ void s21_cat(struct cat_flags* flags, char** argv) {
       }
 
       // flag e
-      if(flags->e && flags->b && c == '\n' && check == '\n')
-          printf("\t$");
-     else if (flags->e && c == '\n') {
+    if (flags->e && c == '\n') {
         printf("$");
       }
       // flag v
