@@ -33,7 +33,7 @@ int parse(int argc, char* argv[], struct cat_flags* flags) {
       {"squeeze-blank", 0, NULL, 's'},
       {0, 0, NULL, 0},
   };
-  char* shortopts = "benstvET";
+  char* shortopts = "+benstvET";
 
   while ((cur_flag = getopt_long(argc, argv, shortopts, longopts, NULL)) !=
          -1) {
