@@ -1,4 +1,3 @@
-
 #include "getopt.h"
 #include "stdio.h"
 
@@ -11,6 +10,22 @@ struct cat_flags {
   int v;
 };
 
+int parse(int argc, char* argv[], struct cat_flags* flags);
+void s21_cat(struct cat_flags* flags, char** argv);
+
+int main(int argc, char* argv[]) {
+    struct cat_flags flags = {0};
+    if (parse(argc, argv, &flags)) {
+        printf("some error");
+    } else {
+        for (int i = optind; i < argc; i++, optind++) {
+            s21_cat(&flags, argv);
+        }
+    }
+
+    return 0;
+}
+
 int parse(int argc, char* argv[], struct cat_flags* flags) {
   int cur_flag;
   int exit = 0;
@@ -18,7 +33,7 @@ int parse(int argc, char* argv[], struct cat_flags* flags) {
       {"number-nonblank", 0, NULL, 'b'},
       {"number", 0, NULL, 'n'},
       {"squeeze-blank", 0, NULL, 's'},
-      {0, 0, 0, 0},
+      {0, 0, NULL, 0},
   };
   char* shortopts = "benstvET";
 
@@ -57,27 +72,24 @@ int parse(int argc, char* argv[], struct cat_flags* flags) {
 void s21_cat(struct cat_flags* flags, char** argv) {
   FILE* file;
   file = fopen(argv[optind], "r");
-
   if (file == NULL) {
     printf("no file");
-
   } else {
     int count = 1;
-    int empty_string = 0;
+    int blank_str = 0;
     int check = '\n';
     int c;
     while ((c = fgetc(file)) != EOF) {
       // flag s
       if (flags->s && c == '\n' && check == '\n') {
-        empty_string++;
-        if (empty_string > 1) {
+        blank_str++;
+        if (blank_str >= 2) {
           continue;
         }
       } else {
-        empty_string = 0;
+        blank_str = 0;
       }
       // flag b and n
-
       if (check == '\n') {
         if (flags->n) {
           printf("%6d\t", count++);
@@ -85,9 +97,8 @@ void s21_cat(struct cat_flags* flags, char** argv) {
           printf("%6d\t", count++);
         }
       }
-
       // flag e
-    if (flags->e && c == '\n') {
+      if (flags->e && c == '\n') {
         printf("$");
       }
       // flag v
@@ -109,20 +120,7 @@ void s21_cat(struct cat_flags* flags, char** argv) {
       printf("%c", c);
       check = c;
     }
-  }
-  fclose(file);
-}
-
-int main(int argc, char* argv[]) {
-  struct cat_flags flags = {0};
-  if (parse(argc, argv, &flags)) {
-    printf("some error");
-  } else {
-    while (optind < argc) {
-      s21_cat(&flags, argv);
-      optind++;
-    }
+      fclose(file);
   }
 
-  return 0;
 }
