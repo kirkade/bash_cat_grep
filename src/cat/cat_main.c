@@ -2,12 +2,7 @@
 #include "stdio.h"
 
 struct cat_flags {
-  int b;
-  int e;
-  int n;
-  int s;
-  int t;
-  int v;
+  int b, e, n, s, t, v;
 };
 
 int parse(int argc, char* argv[], struct cat_flags* flags);
@@ -65,9 +60,7 @@ int parse(int argc, char* argv[], struct cat_flags* flags) {
     if (flags->n && flags->b) flags->n = 0;
   }
   if (exit) {
-    fprintf(stderr,
-            "cat: illegal option -- %c\nusage: cat [-benstuv] [file ...]\n",
-            cur_flag);
+    fprintf(stderr, "illegal option \n");
   }
   return exit;
 }
@@ -76,7 +69,7 @@ void s21_cat(struct cat_flags* flags, char** argv) {
   FILE* file;
   file = fopen(argv[optind], "r");
   if (file == NULL) {
-    fprintf(stderr, "cat: %s: No such file or directory\n", *argv);
+    fprintf(stderr, "No such file or directory\n");
   } else {
     int count = 1;
     int blank_str = 0;

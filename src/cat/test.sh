@@ -245,7 +245,7 @@ fi
 #
 #((counter++))
 
-printf "DONE $((success))\n"
+printf "SUCCESS $((success))\n"
 printf "FAILED $((failed))\n"
 
 rm a.out copy original
