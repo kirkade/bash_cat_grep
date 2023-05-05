@@ -14,16 +14,14 @@ int parse(int argc, char* argv[], struct cat_flags* flags);
 void s21_cat(struct cat_flags* flags, char** argv);
 
 int main(int argc, char* argv[]) {
-    struct cat_flags flags = {0};
-    if (parse(argc, argv, &flags)) {
-        printf("some error");
-    } else {
-        for (int i = optind; i < argc; i++, optind++) {
-            s21_cat(&flags, argv);
-        }
+  struct cat_flags flags = {0};
+  if (!parse(argc, argv, &flags)) {
+    for (int i = optind; i < argc; i++, optind++) {
+      s21_cat(&flags, argv);
     }
+  }
 
-    return 0;
+  return 0;
 }
 
 int parse(int argc, char* argv[], struct cat_flags* flags) {
@@ -66,6 +64,11 @@ int parse(int argc, char* argv[], struct cat_flags* flags) {
     }
     if (flags->n && flags->b) flags->n = 0;
   }
+  if (exit) {
+    fprintf(stderr,
+            "cat: illegal option -- %c\nusage: cat [-benstuv] [file ...]\n",
+            cur_flag);
+  }
   return exit;
 }
 
@@ -73,7 +76,7 @@ void s21_cat(struct cat_flags* flags, char** argv) {
   FILE* file;
   file = fopen(argv[optind], "r");
   if (file == NULL) {
-    printf("no file");
+    fprintf(stderr, "cat: %s: No such file or directory\n", *argv);
   } else {
     int count = 1;
     int blank_str = 0;
@@ -120,7 +123,6 @@ void s21_cat(struct cat_flags* flags, char** argv) {
       printf("%c", c);
       check = c;
     }
-      fclose(file);
+    fclose(file);
   }
-
 }

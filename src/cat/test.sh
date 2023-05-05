@@ -124,6 +124,40 @@ fi
 
 ((counter++))
 
+# no file TEST
+
+cat -v test.tx>original
+gcc $PROG && ./s21_cat -v test.tx>copy
+compare=$(diff original copy)
+
+if [ $? -eq 0 ]; then
+  printf "no file TEST SUCCESS\n"
+  ((success++))
+else
+  printf "no file TEST FAILED\n"
+  printf "$compare"
+  ((failed++))
+fi
+
+((counter++))
+
+# no flag TEST
+
+cat -p test.txt>original
+gcc $PROG && ./s21_cat -p test.txt>copy
+compare=$(diff original copy)
+
+if [ $? -eq 0 ]; then
+  printf "no flag TEST SUCCESS\n"
+  ((success++))
+else
+  printf "no flag TEST FAILED\n"
+  printf "$compare"
+  ((failed++))
+fi
+
+((counter++))
+
 #-E -T --number-nonblank --number --squeeze-blank
 
 ## -E TEST

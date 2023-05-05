@@ -7,6 +7,6 @@ s21_cat:
 	$(CC) $(FLAGS) main.c -o s21_cat
 
 clean:
-	rm -rf s21_cat
+	rm -rf s21_cat *.dSYM
 
 rebuild: clean all
