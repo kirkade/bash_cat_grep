@@ -8,7 +8,7 @@ fail=0
 
 # CAT TEST
 cat test.txt>original
-./s21_cat test.txt>copy
+gcc $CAT && ./s21_cat test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -25,7 +25,7 @@ fi
 # -b TEST
 
 cat -b test.txt>original
-./s21_cat -b test.txt>copy
+gcc $CAT && ./s21_cat -b test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -42,7 +42,7 @@ fi
 # -e TEST
 
 cat -e test.txt>original
-./s21_cat -e test.txt>copy
+gcc $CAT && ./s21_cat -e test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -59,7 +59,7 @@ fi
 # -n TEST
 
 cat -n test.txt>original
-./s21_cat -n test.txt>copy
+gcc $CAT && ./s21_cat -n test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -76,7 +76,7 @@ fi
 # -s TEST
 
 cat -s test.txt>original
-./s21_cat -s test.txt>copy
+gcc $CAT && ./s21_cat -s test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -93,7 +93,7 @@ fi
 # -t TEST
 
 cat -t test.txt>original
-./s21_cat -t test.txt>copy
+gcc $CAT && ./s21_cat -t test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -110,7 +110,7 @@ fi
 # -v TEST
 
 cat -v test.txt>original
-./s21_cat -v test.txt>copy
+gcc $CAT && ./s21_cat -v test.txt>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -127,7 +127,7 @@ fi
 # no file TEST
 
 cat -v test.tx>original
-./s21_cat -v test.tx>copy
+gcc $CAT && ./s21_cat -v test.tx>copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
@@ -144,7 +144,7 @@ fi
 # no flag TEST
 
 cat -p test.txt > original
-./s21_cat -p test.txt > copy
+gcc $CAT && ./s21_cat -p test.txt > copy
 compare=$(diff original copy)
 
 if [ $? -eq 0 ]; then
