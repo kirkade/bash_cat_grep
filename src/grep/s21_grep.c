@@ -104,7 +104,7 @@ void searching(regex_t reg, char *filename, FILE *f, struct grep_flags *flags,
   char *arr = calloc(3000, sizeof(char));
   int count_flag_c = 0;  // номер строки из файла
   int count_flag_n = 1;  // кол-во совпадающих строк
-  while (fgets(arr, 10000, f) != NULL) {
+  while (fgets(arr, 3000, f) != NULL) {
     regmatch_t pmatch;  // информация о расположении совпадений
     size_t nmatch = 1;  // кол-во совпадений
     int exist = 0;
