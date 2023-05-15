@@ -1,10 +1,9 @@
-CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 all: s21_grep
 
 s21_grep: s21_grep.c s21_grep.h
-	$(CC) $(FLAGS) s21_grep.c -o s21_grep
+	gcc -g -Wall -Werror -Wextra -std=c11 -o s21_grep s21_grep.c
+	rm -rf *.dSYM
 
 clean:
 	rm -rf s21_grep
