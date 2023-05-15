@@ -31,6 +31,10 @@ int parse(int argc, char *argv[], struct cat_flags *flags) {
         flags->e = 1;
         flags->v = 1;
         break;
+      case 'E':
+        flags->e = 1;
+        flags->v = 1;
+        break;
       case 'n':
         flags->n = 1;
         break;
@@ -41,6 +45,10 @@ int parse(int argc, char *argv[], struct cat_flags *flags) {
         flags->t = 1;
         flags->v = 1;
         break;
+       case 'T':
+        flags->t = 1;
+        flags->v = 1;
+        break; 
       case 'v':
         flags->v = 1;
         break;

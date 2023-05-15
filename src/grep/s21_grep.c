@@ -176,6 +176,7 @@ void flag_f(char *arr, char *filename) {
       if (c == '\n') arr[i++] = '|';
     }
     if (arr[i - 1] == '|') arr[i - 1] = '\0';
+    fclose(f);
   }
-  fclose(f);
+  
 }
