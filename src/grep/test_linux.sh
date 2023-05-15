@@ -135,7 +135,6 @@ fi
 grep -s a test.txt test2.txt>original
 gcc $PROG && ./s21_grep -s a test.txt test2.txt>copy
 
-
 if [ $? -eq 0 ]; then
   printf "GREP -s a TEST SUCCESS\n"
 
@@ -197,7 +196,7 @@ fi
 
 
 
-# GREP -in TEST
+# GREP -in a TEST
 grep -in a test.txt test2.txt test3.txt>original
 gcc $PROG && ./s21_grep -in a test.txt test2.txt test3.txt>copy
 compare=$(diff original copy)
